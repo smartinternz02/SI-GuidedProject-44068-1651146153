@@ -37,16 +37,19 @@ public class ExpenseTrackerController {
         return "register";
     }
 
-    @PostMapping("/process_register")
+    @PostMapping("/user_register")
     public String processRegister(User user){
         userRepo.save(user);
         return "login";
     }
 
-    @PostMapping("/process_login")
+    @PostMapping("/user_login")
     public String processLogIn(@RequestParam String email, @RequestParam String password){
         User person = userRepo.findByEmail(email);
-        if(person!=null && Objects.equals(password, person.getPassword())) return "success";
-        else return "failure";
+        if(person!=null && Objects.equals(password, person.getPassword())) return "home";
+        else {
+            System.out.println("Wrong Credentials");
+            return "login";
+        }
     }
 }
