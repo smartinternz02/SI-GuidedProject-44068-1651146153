@@ -1,4 +1,4 @@
-package com.externship.expensetracker;
+package com.externship.expensetracker.util;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
