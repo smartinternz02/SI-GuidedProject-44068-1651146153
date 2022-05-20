@@ -3,7 +3,4 @@ package com.externship.expensetracker;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class ExpenseTrackerController {
-
-
-}
+public class ExpenseTrackerController {}
