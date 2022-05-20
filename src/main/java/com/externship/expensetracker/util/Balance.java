@@ -1,4 +1,4 @@
-package com.externship.expensetracker.tables;
+package com.externship.expensetracker.util;
 
 import lombok.Getter;
 import lombok.Setter;
