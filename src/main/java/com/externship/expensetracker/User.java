@@ -8,7 +8,6 @@ public class User {
 
     @Id
     private String email;
-
     private String firstname, lastname;
     private String password;
 
