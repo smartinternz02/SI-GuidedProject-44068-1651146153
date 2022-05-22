@@ -1,4 +1,4 @@
-package com.externship.expensetracker.util;
+package com.externship.expensetracker.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

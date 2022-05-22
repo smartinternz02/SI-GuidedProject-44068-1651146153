@@ -1,6 +1,6 @@
-package com.externship.expensetracker.repo;
+package com.externship.expensetracker.repository;
 
-import com.externship.expensetracker.util.Balance;
+import com.externship.expensetracker.model.Balance;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BalanceRepo extends JpaRepository<Balance, String> {
