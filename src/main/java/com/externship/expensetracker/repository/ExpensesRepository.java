@@ -1,6 +1,6 @@
 package com.externship.expensetracker.repository;
 
-import com.externship.expensetracker.model.Expenses;
+import com.externship.expensetracker.table.Expenses;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.externship.expensetracker.model;
+package com.externship.expensetracker.table;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,11 +12,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Category {
+public class Balance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "cat_id")
+    @Column(name = "bal_id")
     int id;
-    String category;
+    int balance;
+    long user;
 }
