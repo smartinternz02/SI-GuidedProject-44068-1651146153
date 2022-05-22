@@ -66,7 +66,6 @@ public class ExpenseTrackerController {
 
     @PostMapping("/process_expense_add")
     public void processExpensesAdd(Expenses expenses){
-        expenses.setEmail(email);
         expensesRepo.save(expenses);
     }
 
@@ -84,7 +83,6 @@ public class ExpenseTrackerController {
 
     @PostMapping("/process_balance_add")
     public void processBalanceAdd(Balance balance){
-        balance.setEmail(email);
         balanceRepo.save(balance);
     }
 }
