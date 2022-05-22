@@ -1,16 +1,10 @@
 package com.externship.expensetracker.controller;
 
 import com.externship.expensetracker.repository.*;
-import com.externship.expensetracker.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
-import java.util.Objects;
 
 @Controller
 public class ExpenseTrackerController {
@@ -22,11 +16,11 @@ public class ExpenseTrackerController {
     @Autowired
     BalanceRepository balanceRepository;
 
-    long userId;
+    long id;
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public String indexPage() {
-        return "index";
+        return "redirect:/user_login";
     }
 
     @RequestMapping("/user_register")
