@@ -16,11 +16,11 @@ import java.util.Objects;
 public class ExpenseTrackerController {
 
     @Autowired
-    UserRepo userRepo;
+    UserRepository userRepository;
     @Autowired
-    ExpensesRepo expensesRepo;
+    ExpensesRepository expensesRepository;
     @Autowired
-    BalanceRepo balanceRepo;
+    BalanceRepository balanceRepository;
 
     String email;
 
@@ -36,7 +36,7 @@ public class ExpenseTrackerController {
 
     @PostMapping("/process_user_register")
     public String processUserRegister(User user){
-        userRepo.save(user);
+        userRepository.save(user);
         return "user_login";
     }
 
@@ -47,7 +47,7 @@ public class ExpenseTrackerController {
 
     @PostMapping("/process_user_login")
     public String processUserLogIn(@RequestParam String email, @RequestParam String password){
-        User person = userRepo.findByEmail(email);
+        User person = userRepository.findByEmail(email);
         if(person!=null && Objects.equals(password, person.getPassword())) {
             this.email = email;
             return "home";
@@ -66,12 +66,12 @@ public class ExpenseTrackerController {
 
     @PostMapping("/process_expense_add")
     public void processExpensesAdd(Expenses expenses){
-        expensesRepo.save(expenses);
+        expensesRepository.save(expenses);
     }
 
     @RequestMapping("/expenses_view")
     public String viewExpensesPage() {
-        List<Expenses> expenses = expensesRepo.findAllByEmail(email);
+        List<Expenses> expenses = expensesRepository.findAllByEmail(email);
         //Code for DOM
         return "expenses_view";
     }
@@ -83,6 +83,6 @@ public class ExpenseTrackerController {
 
     @PostMapping("/process_balance_add")
     public void processBalanceAdd(Balance balance){
-        balanceRepo.save(balance);
+        balanceRepository.save(balance);
     }
 }
