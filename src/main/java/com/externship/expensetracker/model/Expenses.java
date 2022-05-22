@@ -22,6 +22,7 @@ public class Expenses {
     int id;
     int amount;
     long user;
+    @Column(columnDefinition = "Date")
     LocalDate date;
     int category;
 

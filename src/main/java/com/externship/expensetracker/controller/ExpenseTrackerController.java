@@ -22,7 +22,7 @@ public class ExpenseTrackerController {
     @Autowired
     BalanceRepository balanceRepository;
 
-    String email;
+    long userId;
 
     @RequestMapping("/index")
     public String indexPage() {
@@ -34,29 +34,9 @@ public class ExpenseTrackerController {
         return "user_register";
     }
 
-    @PostMapping("/process_user_register")
-    public String processUserRegister(User user){
-        userRepository.save(user);
-        return "user_login";
-    }
-
     @RequestMapping("/user_login")
     public String logInPage() {
         return "user_login";
-    }
-
-    @PostMapping("/process_user_login")
-    public String processUserLogIn(@RequestParam String email, @RequestParam String password){
-        User person = userRepository.findByEmail(email);
-        if(person!=null && Objects.equals(password, person.getPassword())) {
-            this.email = email;
-            return "home";
-        }
-        else {
-            System.out.println("Wrong Credentials");
-            //Code to make alert in login page
-            return "user_login";
-        }
     }
 
     @RequestMapping("/expenses_add")
@@ -64,25 +44,13 @@ public class ExpenseTrackerController {
         return "expenses_add";
     }
 
-    @PostMapping("/process_expense_add")
-    public void processExpensesAdd(Expenses expenses){
-        expensesRepository.save(expenses);
-    }
-
     @RequestMapping("/expenses_view")
     public String viewExpensesPage() {
-        List<Expenses> expenses = expensesRepository.findAllByEmail(email);
-        //Code for DOM
         return "expenses_view";
     }
 
     @RequestMapping("/balance_add")
     public String addBalancePage() {
         return "balance_add";
-    }
-
-    @PostMapping("/process_balance_add")
-    public void processBalanceAdd(Balance balance){
-        balanceRepository.save(balance);
     }
 }

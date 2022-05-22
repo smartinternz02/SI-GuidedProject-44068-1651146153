@@ -1,0 +1,54 @@
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url = jdbc:mysql://remotemysql.com:3306/zlmqy2Gkxb
+spring.datasource.username = zlmqy2Gkxb
+spring.datasource.password = 4Yex3gRsHK
+server.error.whitelabel.enabled=false
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+spring.jpa.generate-ddl=true
+spring.jpa.show-sql=true
+server.port=${PORT:8080}
+
+
+Balance
+
+balId (bal_id) - sequence
+bal
+ballog
+Repo {
+	int Balsum(@Param("logger") Long logger); - ("select sum(bal) from balance where ballog=:logger")
+}
+
+
+Categories
+
+catid (cat_id) - sequence
+category
+Repo {}
+
+
+Expenses
+
+id (expense_id) - sequence
+date
+category
+amount
+user
+Repo {
+	public Iterable<Expenses> xpensesbylogin(long logger); - ("SELECT * from expenses where logged=:logger")
+	public int amountsum(); - ("SELECT SUM(amount) FROM Expenses")
+	public String[] cats(long logger); - ("SELECT Distinct category from expenses where logged=:logger order by category ASC")
+	...
+}
+
+
+User
+
+userid (user_id) - auto
+emailId
+password
+firstname
+lastname
+Repo {
+	User findByEmailIdIgnoreCase(String emailId);
+	public long[] ids(); - ("select userid from User")
+}
