@@ -1,4 +1,4 @@
-package com.externship.expensetracker.model;
+package com.externship.expensetracker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

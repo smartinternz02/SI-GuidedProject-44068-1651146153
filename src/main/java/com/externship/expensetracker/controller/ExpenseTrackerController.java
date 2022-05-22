@@ -1,7 +1,7 @@
 package com.externship.expensetracker.controller;
 
 import com.externship.expensetracker.repository.*;
-import com.externship.expensetracker.table.*;
+import com.externship.expensetracker.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
