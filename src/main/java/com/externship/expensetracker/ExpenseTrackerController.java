@@ -1,10 +1,8 @@
 package com.externship.expensetracker;
 
-import com.externship.expensetracker.repo.BalanceRepo;
-import com.externship.expensetracker.repo.ExpensesRepo;
-import com.externship.expensetracker.repo.UserRepo;
-import com.externship.expensetracker.util.Expenses;
-import com.externship.expensetracker.util.User;
+import com.externship.expensetracker.repo.*;
+import com.externship.expensetracker.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,6 +66,7 @@ public class ExpenseTrackerController {
 
     @PostMapping("/process_expense_add")
     public void processExpensesAdd(Expenses expenses){
+        expenses.setEmail(email);
         expensesRepo.save(expenses);
     }
 
@@ -76,5 +75,16 @@ public class ExpenseTrackerController {
         List<Expenses> expenses = expensesRepo.findAllByEmail(email);
         //Code for DOM
         return "expenses_view";
+    }
+
+    @RequestMapping("/balance_add")
+    public String addBalancePage() {
+        return "balance_add";
+    }
+
+    @PostMapping("/process_balance_add")
+    public void processBalanceAdd(Balance balance){
+        balance.setEmail(email);
+        balanceRepo.save(balance);
     }
 }
