@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ExpenseTrackerController {
 
+    long id;
     @Autowired
-    UserRepository userRepository;
+    BalanceRepository balanceRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
     @Autowired
     ExpensesRepository expensesRepository;
     @Autowired
-    BalanceRepository balanceRepository;
-
-    long id;
+    UserRepository userRepository;
 
     @RequestMapping("/")
     public String indexPage() {
