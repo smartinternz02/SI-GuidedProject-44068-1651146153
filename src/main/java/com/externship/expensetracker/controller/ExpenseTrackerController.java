@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ExpenseTrackerController {
 
-    long id;
     @Autowired
     BalanceRepository balanceRepository;
     @Autowired
@@ -18,6 +17,8 @@ public class ExpenseTrackerController {
     ExpensesRepository expensesRepository;
     @Autowired
     UserRepository userRepository;
+
+    long id;
 
     @RequestMapping("/")
     public String indexPage() {
