@@ -15,10 +15,10 @@ public interface ExpensesRepository extends JpaRepository<Expenses, String> {
     @Query(value = "select sum(amount) from expenses", nativeQuery = true)
     int getAllExpenses();
 
-    @Query(value = "select sum(amount) from expenses where user = :user group by category", nativeQuery = true)
+    @Query(value = "select sum(amount) from expenses where user = :user group by category order by category", nativeQuery = true)
     int[] getCategoryWiseExpenses(@Param("user") long user);
 
-    @Query(value = "select distinct category from expenses where user = :user", nativeQuery = true)
+    @Query(value = "select distinct category from expenses where user = :user order by category", nativeQuery = true)
     String[] getAllCategories(@Param("user") long user);
 
     @Query(value = "select sum(amount) from expenses where user = :user group by month(date)", nativeQuery = true)
@@ -33,10 +33,10 @@ public interface ExpensesRepository extends JpaRepository<Expenses, String> {
     @Query(value = "select year(date) from expenses where user = :user group by year(date)", nativeQuery = true)
     String[] getYears(@Param("user") long user);
 
-    @Query(value = "select sum(amount) from expenses where date between curdate()-7 AND curdate() group by date", nativeQuery = true)
+    @Query(value = "select sum(amount) from expenses where date between curdate()-7 AND curdate() group by date order by date", nativeQuery = true)
     int[] getWeeklyExpenses();
 
-    @Query(value = "select date from expenses where date between curdate()-7 AND curdate() group by date", nativeQuery = true)
+    @Query(value = "select date from expenses where date between curdate()-7 AND curdate() group by date order by date", nativeQuery = true)
     String[] getWeekDates();
 }
 
