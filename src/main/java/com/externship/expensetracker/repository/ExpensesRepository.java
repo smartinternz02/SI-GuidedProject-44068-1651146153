@@ -33,10 +33,10 @@ public interface ExpensesRepository extends JpaRepository<Expenses, String> {
     @Query(value = "select year(date) from expenses where user = :user group by year(date)", nativeQuery = true)
     String[] getYears(@Param("user") long user);
 
-    @Query(value = "select sum(amount) from expenses where date between curdate()-7 AND curdate() group by date order by date", nativeQuery = true)
-    int[] getWeeklyExpenses();
+    @Query(value = "select sum(amount) from expenses where user = :user and date between curdate()-7 and curdate() group by date order by date", nativeQuery = true)
+    int[] getLastWeekExpenses(@Param("user") long user);
 
-    @Query(value = "select date from expenses where date between curdate()-7 AND curdate() group by date order by date", nativeQuery = true)
-    String[] getWeekDates();
+    @Query(value = "select date from expenses where user = :user and date between curdate()-7 and curdate() group by date order by date", nativeQuery = true)
+    String[] getLastWeekDates(@Param("user") long user);
 }
 

@@ -76,3 +76,15 @@ Models And Repositories{
             @Query(value = "select user_id from user", nativeQuery = true)
     }
 }
+
+Controller {
+    BalanceRepository balanceRepository;
+    CategoryRepository categoryRepository;
+    ExpensesRepository expensesRepository;
+    UserRepository userRepository;
+    long userId;
+    int netBalance;
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+}

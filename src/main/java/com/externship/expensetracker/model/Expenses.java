@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,8 +24,4 @@ public class Expenses {
     @Column(columnDefinition = "Date")
     LocalDate date;
     int category;
-
-    public String getDateForDatabase() {
-        return date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    }
 }
