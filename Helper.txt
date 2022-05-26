@@ -90,5 +90,52 @@ Controller {
     int netBalance;
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+    Private Function
+    {
+        public String displayIndexPage();
+            @RequestMapping("/")
+        public ModelAndView displayRegistrationPage(ModelAndView modelAndView, User user);
+            @GetMapping(value = "/user_register")
+        public String registerUser(ModelAndView modelAndView, User user);
+            @PostMapping("/user_register")
+        public ModelAndView displayLogInPage(ModelAndView modelAndView, User user);
+            @GetMapping("/user_login")
+        public ModelAndView logUserIn(ModelAndView modelAndView, User user);
+            @PostMapping("/user_login")
+        public String logUserOut();
+            @RequestMapping("/logout")
+        public ModelAndView displayExpenseAddPage(ModelAndView modelAndView, Expenses expenses);
+            @GetMapping("/expense_add")
+        public String addExpenses(ModelAndView modelAndView, Expenses expenses, Balance balance);
+            @PostMapping(value = "/expense_add")
+        public ModelAndView displayExpenseViewPage(ModelAndView modelAndView);
+            @GetMapping("/expense_view")
+        public ModelAndView addBalance(ModelAndView modelAndView, Balance balance);
+            @GetMapping(value = "/balance_add")
+        public ModelAndView saveMoney(ModelAndView modelAndView, Balance balance);
+            @PostMapping("/balance_add")
+        public ModelAndView displayBalanceViewPage(ModelAndView modelAndView);
+            @GetMapping(value = "/balance_view")
+        public String deleteExpense(@PathVariable int id);
+            @DeleteMapping("/delete/{id}")
+        public String displayAnalysisPage();
+            @RequestMapping("/analysis")
+        public String displayCategoryWiseAnalysis();
+            @RequestMapping("/analysis_category")
+        public String displayLastWeekExpense();
+            @RequestMapping("/analysis_week")
+        public String displayMonthlyAnalysis();
+            @RequestMapping("/analysis_month")
+        public String displayYearlyAnalysis();
+            @RequestMapping("/analysis_year")
+        public ResponseEntity<TreeMap<String, Integer>> getPieChart(ModelAndView modelAndView);
+            @GetMapping("/analysis_category/data")
+        public ResponseEntity<TreeMap<String, Integer>> MonthWiseGraphData(ModelAndView modelAndView);
+            @GetMapping("/analysis_month/data")
+        public ResponseEntity<TreeMap<String, Integer>> YearWiseGraphData(ModelAndView modelAndView);
+            @GetMapping("/analysis_year/data")
+        public ResponseEntity<TreeMap<String, Integer>> Last7DaysGraphData(ModelAndView modelAndView);
+            @GetMapping("/analysis_week/data")
+        private TreeMap<String, Integer> getTable(int[] entries, String[] types);
+    }
 }
