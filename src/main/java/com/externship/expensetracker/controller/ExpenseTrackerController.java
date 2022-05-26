@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
 import java.util.TreeMap;
 
 @Controller
@@ -234,7 +233,7 @@ public class ExpenseTrackerController {
     }
 
     @GetMapping("/analysis_month/data")
-    public ResponseEntity<Map<String, Integer>> MonthWiseGraphData(ModelAndView modelAndView) {
+    public ResponseEntity<TreeMap<String, Integer>> MonthWiseGraphData(ModelAndView modelAndView) {
         int[] amountEntries = expensesRepository.getMonthWiseExpenses(userId);
         String[] months = expensesRepository.getMonths(userId);
         TreeMap<String, Integer> table = getTable(amountEntries, months);
@@ -245,7 +244,7 @@ public class ExpenseTrackerController {
     }
 
     @GetMapping("/analysis_year/data")
-    public ResponseEntity<Map<String, Integer>> YearWiseGraphData(ModelAndView modelAndView) {
+    public ResponseEntity<TreeMap<String, Integer>> YearWiseGraphData(ModelAndView modelAndView) {
         int[] amountEntries = expensesRepository.getYearWiseExpenses(userId);
         String[] years = expensesRepository.getYears(userId);
         TreeMap<String, Integer> table = getTable(amountEntries, years);
@@ -256,7 +255,7 @@ public class ExpenseTrackerController {
     }
 
     @GetMapping("/analysis_week/data")
-    public ResponseEntity<Map<String, Integer>> Last7DaysGraphData(ModelAndView modelAndView) {
+    public ResponseEntity<TreeMap<String, Integer>> Last7DaysGraphData(ModelAndView modelAndView) {
         int[] amountEntries = expensesRepository.getLastWeekExpenses(userId);
         String[] dates = expensesRepository.getLastWeekDates(userId);
         TreeMap<String, Integer> table = getTable(amountEntries, dates);
