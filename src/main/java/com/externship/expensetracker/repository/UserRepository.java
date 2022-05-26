@@ -9,7 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, String> {
 
     User findByEmailIgnoreCase(String email);
-
-    @Query(value = "select user_id from user", nativeQuery = true)
-    long[] getAllUserIds();
 }
