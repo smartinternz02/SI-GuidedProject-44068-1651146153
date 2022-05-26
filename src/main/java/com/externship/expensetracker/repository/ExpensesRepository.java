@@ -12,9 +12,6 @@ public interface ExpensesRepository extends JpaRepository<Expenses, String> {
     @Query(value = "select * from expenses where user = :user", nativeQuery = true)
     Iterable<Expenses> getAllEntries(@Param("user") long user);
 
-    @Query(value = "select sum(amount) from expenses", nativeQuery = true)
-    int getAllExpenses();
-
     @Query(value = "select sum(amount) from expenses where user = :user group by category order by category", nativeQuery = true)
     int[] getCategoryWiseExpenses(@Param("user") long user);
 

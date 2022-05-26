@@ -21,8 +21,6 @@ public class ExpenseTrackerController {
     @Autowired
     BalanceRepository balanceRepository;
     @Autowired
-    CategoryRepository categoryRepository;
-    @Autowired
     ExpensesRepository expensesRepository;
     @Autowired
     UserRepository userRepository;
