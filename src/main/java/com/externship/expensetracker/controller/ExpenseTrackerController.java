@@ -115,7 +115,7 @@ public class ExpenseTrackerController {
                 balance.setAmount(-(expenses.getAmount()));
                 balanceRepository.save(balance);
                 modelAndView.addObject("message", "Expenses Added Successfully");
-                modelAndView.setViewName("expense_view");
+                modelAndView.setViewName("expense_add");
             }
         } catch (Exception e) {
             modelAndView.addObject("message", e.getMessage());
