@@ -21,6 +21,7 @@ public class Expenses {
     int id;
     int amount;
     long user;
+    @Column(columnDefinition = "date")
     Date date;
     String category;
 }
