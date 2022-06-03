@@ -18,6 +18,6 @@ public class Balance {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "bal_id")
     int id;
-    int balance;
+    int amount;
     long user;
 }

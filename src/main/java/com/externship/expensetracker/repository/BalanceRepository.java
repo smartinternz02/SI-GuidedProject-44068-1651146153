@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BalanceRepository extends JpaRepository<Balance, String> {
 
-    @Query(value = "select sum(balance) from balance where user = :user", nativeQuery = true)
+    @Query(value = "select sum(amount) from balance where user = :user", nativeQuery = true)
     int getNetBalanceOf(@Param("user") Long user);
 }
 

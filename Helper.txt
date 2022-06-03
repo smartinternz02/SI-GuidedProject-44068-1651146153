@@ -18,11 +18,11 @@ Models And Repositories{
     Balance
     {
         int id; @Column(name = "bal_id")
-        int balance;
+        int amount;
         long user;
         Repository {
             int getNetBalanceOf(@Param("user") Long user);
-                @Query(value = "select sum(balance) from balance where user = :user", nativeQuery = true)
+                @Query(value = "select sum(amount) from balance where user = :user", nativeQuery = true)
         }
     }
 

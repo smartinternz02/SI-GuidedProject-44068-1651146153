@@ -34,7 +34,7 @@ public class ExpenseTrackerController {
         return "redirect:/user_login";
     }
 
-    @GetMapping(value = "/user_register")
+    @GetMapping("/user_register")
     public ModelAndView displayRegistrationPage(ModelAndView modelAndView, User user) {
         modelAndView.addObject("user", user);
         modelAndView.setViewName("user_register");
@@ -90,7 +90,7 @@ public class ExpenseTrackerController {
 
     @RequestMapping("/logout")
     public String logUserOut() {
-        return "user_login";
+        return "redirect:/user_login";
     }
 
     @GetMapping("/expense_add")
@@ -100,8 +100,8 @@ public class ExpenseTrackerController {
         return modelAndView;
     }
 
-    @PostMapping(value = "/expense_add")
-    public String addExpenses(ModelAndView modelAndView, Expenses expenses, Balance balance) {
+    @PostMapping("/expense_add")
+    public ModelAndView addExpenses(ModelAndView modelAndView, Expenses expenses, Balance balance) {
         try {
             if ((expenses.getAmount()) > (balanceRepository.getNetBalanceOf(userId))) {
                 modelAndView.addObject("message", "Your balance is low you can't spend money!!!");
@@ -109,7 +109,8 @@ public class ExpenseTrackerController {
             } else {
                 expenses.setUser(userId);
                 expensesRepository.save(expenses);
-                balance.setBalance(-(expenses.getAmount()));
+                balance.setUser(userId);
+                balance.setAmount(-(expenses.getAmount()));
                 balanceRepository.save(balance);
                 modelAndView.addObject("message", "Expenses Added Successfully");
                 modelAndView.setViewName("expense_view");
@@ -118,7 +119,7 @@ public class ExpenseTrackerController {
             modelAndView.addObject("message", e.getMessage());
             modelAndView.setViewName("balance_add");
         }
-        return "redirect:/expense_view";
+        return modelAndView;
     }
 
     @GetMapping("/expense_view")
@@ -134,20 +135,15 @@ public class ExpenseTrackerController {
         return modelAndView;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/user_home")
     public String displayHomePage() {
-        return  "home";
+        return "user_home";
     }
 
     @GetMapping(value = "/balance_add")
-    public ModelAndView addBalance(ModelAndView modelAndView, Balance balance) {
-        try {
-            modelAndView.addObject("balance", balance);
-            modelAndView.setViewName("balance_add");
-        } catch (Exception e) {
-            modelAndView.addObject("message", e.getMessage());
-            modelAndView.setViewName("user_home");
-        }
+    public ModelAndView displayAddBalancePage(ModelAndView modelAndView, Balance balance) {
+        modelAndView.addObject("balance", balance);
+        modelAndView.setViewName("balance_add");
         return modelAndView;
     }
 
@@ -157,11 +153,10 @@ public class ExpenseTrackerController {
             balance.setUser(userId);
             balanceRepository.save(balance);
             modelAndView.addObject("message", "You have successfully added money to your wallet!!");
-            modelAndView.setViewName("balance_add");
         } catch (Exception e) {
             modelAndView.addObject("message", e.getMessage());
-            modelAndView.setViewName("AddMoney");
         }
+        modelAndView.setViewName("balance_add");
         return modelAndView;
     }
 
@@ -178,9 +173,9 @@ public class ExpenseTrackerController {
         return modelAndView;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteExpense(@PathVariable int id) {
-        expensesRepository.deleteById(String.valueOf(id));
+    @PostMapping("/delete/{id}")
+    public String deleteExpense(@PathVariable String id) {
+        expensesRepository.deleteById(id);
         return "redirect:/expense_view";
     }
 
@@ -212,7 +207,7 @@ public class ExpenseTrackerController {
     private TreeMap<String, Integer> getTable(int[] entries, String[] types) {
         TreeMap<String, Integer> table = new TreeMap<>();
         System.out.println(types.length);
-        for (int i=0; i<types.length; i++) {
+        for (int i = 0; i < types.length; i++) {
             table.put(types[i], entries[i]);
             System.out.println(table);
         }
@@ -226,7 +221,7 @@ public class ExpenseTrackerController {
         TreeMap<String, Integer> table = getTable(amountEntries, categories);
         modelAndView.addObject("chartData", table);
         modelAndView.addObject("size", expensesRepository.count());
-        modelAndView.setViewName("analysis_graph");
+        modelAndView.setViewName("analysis_category");
         return new ResponseEntity<>(table, HttpStatus.OK);
     }
 
@@ -237,7 +232,7 @@ public class ExpenseTrackerController {
         TreeMap<String, Integer> table = getTable(amountEntries, months);
         modelAndView.addObject("chartData", table);
         modelAndView.addObject("size", expensesRepository.count());
-        modelAndView.setViewName("analysis_graph");
+        modelAndView.setViewName("analysis_month");
         return new ResponseEntity<>(table, HttpStatus.OK);
     }
 
@@ -248,7 +243,7 @@ public class ExpenseTrackerController {
         TreeMap<String, Integer> table = getTable(amountEntries, years);
         modelAndView.addObject("chartData", table);
         modelAndView.addObject("size", expensesRepository.count());
-        modelAndView.setViewName("analysis_graph");
+        modelAndView.setViewName("analysis_year");
         return new ResponseEntity<>(table, HttpStatus.OK);
     }
 
@@ -259,7 +254,7 @@ public class ExpenseTrackerController {
         TreeMap<String, Integer> table = getTable(amountEntries, dates);
         modelAndView.addObject("chartData", table);
         modelAndView.addObject("size", expensesRepository.count());
-        modelAndView.setViewName("analysis_graph");
+        modelAndView.setViewName("analysis_week");
         return new ResponseEntity<>(table, HttpStatus.OK);
     }
 }

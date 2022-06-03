@@ -23,5 +23,5 @@ public class Expenses {
     long user;
     @Column(columnDefinition = "Date")
     LocalDate date;
-    int category;
+    String category;
 }
