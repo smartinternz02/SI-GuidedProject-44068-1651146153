@@ -173,12 +173,6 @@ public class ExpenseTrackerController {
         return modelAndView;
     }
 
-    @PostMapping("/delete/{id}")
-    public String deleteExpense(@PathVariable String id) {
-        expensesRepository.deleteById(id);
-        return "redirect:/expense_view";
-    }
-
     @RequestMapping("/analysis")
     public String displayAnalysisPage() {
         return "analysis";
