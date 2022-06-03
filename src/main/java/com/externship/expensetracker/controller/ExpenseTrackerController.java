@@ -101,7 +101,7 @@ public class ExpenseTrackerController {
     }
 
     @PostMapping("/expense_add")
-    public ModelAndView addExpenses(ModelAndView modelAndView, Expenses expenses, Balance balance) {
+    public ModelAndView addExpenses(ModelAndView modelAndView, Expenses expenses) {
         try {
             if ((expenses.getAmount()) > (balanceRepository.getNetBalanceOf(userId))) {
                 modelAndView.addObject("message", "Your balance is low you can't spend money!!!");
@@ -109,6 +109,8 @@ public class ExpenseTrackerController {
             } else {
                 expenses.setUser(userId);
                 expensesRepository.save(expenses);
+                Balance balance = new Balance();
+                balance.setAmount(expenses.getAmount());
                 balance.setUser(userId);
                 balance.setAmount(-(expenses.getAmount()));
                 balanceRepository.save(balance);
