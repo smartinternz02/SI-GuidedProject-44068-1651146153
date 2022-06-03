@@ -116,8 +116,6 @@ Controller {
             @PostMapping("/balance_add")
         public ModelAndView displayBalanceViewPage(ModelAndView modelAndView);
             @GetMapping(value = "/balance_view")
-        public String deleteExpense(@PathVariable int id);
-            @DeleteMapping("/delete/{id}")
         public String displayAnalysisPage();
             @RequestMapping("/analysis")
         public String displayCategoryWiseAnalysis();
